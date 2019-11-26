@@ -1,0 +1,10 @@
+mixin feature(tag, color, title, description)
+    section.feature(id=tag)
+        .feature__content
+            if block
+                block
+            else
+                p This feature is not implemented yet
+        .feature__content(class=color)
+            h2.feature__content__heading #{title}
+            .feature__content__text #{description}

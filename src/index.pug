@@ -1,0 +1,29 @@
+include ./pug/feature_section.pug
+include ./data.pug
+
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Daily interaction design-challenge
+        link(rel="stylesheet" href="./style.sass")
+    body
+        header
+            h1.page_title(id=data.intro.id) #{data.intro.title}
+            .intro
+                .intro__text #{data.intro.text}
+                    a(href=data.intro.link) #{data.intro.link}
+                menu.intro__menu
+                    h3 Table of content
+                    ul.intro__menu__ul
+                        each item in data
+                            li.intro__menu__li
+                                a.intro__menu__link(href=item.id) #{item.title}
+        +feature(data.nextButton.id, "blue", data.nextButton.title, data.nextButton.text)
+            .next_button
+                .next_button__button 
+                    span Next
+                    .next_button__arrow-right
+        

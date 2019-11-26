@@ -1,0 +1,19 @@
+{
+  "name": "ixd-challenge",
+  "version": "1.0.0",
+  "description": "Daily challenge to create interaction design patterns",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.pug",
+    "build":  "parcel build src/index.pug"
+  },
+  "author": "Oliver Schwamb",
+  "license": "ISC",
+  "dependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "devDependencies": {
+    "pug": "^2.0.4",
+    "sass": "^1.23.7"
+  }
+}

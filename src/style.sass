@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap')
+
+/********** VARIABLES **********/
+// COLORS
+$darkblue: #132743
+$blue: #407088
+$pink: #ffb5b5
+$lightpink: #ffcbcb
+$lightgrey: #f1f1f1
+$white: #ffffff
+$black: #1f1f1f
+/********** MIXINS **********/
+
+@mixin pseudo($props: all, $duration, $function)
+    content: ''
+    position: absolute
+    transition: $props $duration $function
+
+/********** EXTENDABLES **********/
+// centering any item vertically and horizontally
+%flex-center
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    height: 100% 
+
+/********** GENERIC SETTINGS **********/
+html, body
+    width: 100%
+    margin: 0
+    padding: 0
+    font-family: 'Varela Round', sans-serif
+    font-size: 10px
+    box-sizing: border-box
+    color: $black 
+    background: $lightgrey 
+
+h1, h2, h3
+    font-size: 4rem
+    font-family: 'Varela Round'
+    margin: 0
+    padding: 0
+    padding-bottom: 1.5rem
+
+
+h2
+    font-size: 3.2rem
+
+h3
+    font-size: 2.5rem
+    padding-bottom: 1.5rem
+
+div
+    font-size: 1.6rem
+    font-family: 'Open Sans', sans-serif
+
+a
+    color: $blue
+    font-size: 1.6rem
+    &:visited
+        color: $pink 
+
+/********* SKIN **********/
+.darkblue
+    background: $darkblue
+    color: $white
+
+.blue
+    background: $blue
+    color: $white
+
+.pink
+    background: $pink
+
+.lightpink
+    background: $lightpink
+
+/********* COMPONTENTS **********/
+// header with title, description and menu
+.page_title
+    margin: 3rem 5rem
+
+.intro, .feature
+    display: grid
+    grid-template-columns: repeat(2, 50%)
+    border-bottom: 3px solid $black
+
+
+.intro__text
+    margin: 5rem
+    font-size: 2rem
+    line-height: 3rem
+
+.intro__menu
+    margin: 5rem
+    text-align: center
+    &__ul
+        list-style: none
+        padding: 0
+
+// feature
+
+.feature    
+    &__content
+        width: 100%
+        padding: 5rem
+        box-sizing: border-box
+        &__text
+            line-height: 2.6rem
+
+
+/********** FEATURES **********/
+
+// Next Button: 26.11.19
+
+.next_button
+    @extend %flex-center
+    &__button
+        // basic properties
+        color: $blue
+        background: $white
+        border: 3px solid $blue
+        font-family: 'Varela Round'
+        font-size: 2rem
+        padding: 1rem 3rem 1rem 2rem // more space on the right als the motion goes to the right
+        border-radius: 1rem
+        display: flex
+        align-items: center
+        cursor: pointer
+    &__arrow-right
+        position: relative
+        padding-left: 1rem
+        &::before
+            @include pseudo($duration: .3s, $function: cubic-bezier(.1,.83,.21,.92))
+            // standard size for arrow-body
+            width: 1rem
+            height: 0.2rem 
+            background: $blue
+        &::after
+            @include pseudo($duration: .3s, $function: cubic-bezier(.1,.83,.21,.92))
+            // creating a triangle
+            width: 0
+            height: 0
+            border-top: .5rem solid transparent
+            border-bottom: .5rem solid transparent
+            border-left: .5rem solid $blue
+            // positioning the triangle relative to the button
+            top: -0.4rem
+            right: -1.5rem
+
+.next_button__button
+    &:hover
+        .next_button__arrow-right
+            // the full arrow is animated
+            animation: wrench 500ms cubic-bezier(.1,.83,.21,.92) infinite
+            &::before
+                // make arrow-body long
+                width: 2.7rem
+            &::after
+                // adapt to now arrow-body
+                right: -2.7rem
+    &:active
+        // color invert for the whole button
+        background: $blue
+        color: $white
+        .next_button__arrow-right
+            &::before
+                // color invert + move arrow out of the button
+                background: $white
+                width: 0
+                transform: translateX(3rem)
+            &::after
+                // color invert + move arrow out of the button
+                border-left-color: $white
+                right: -3.5rem
+                transform: scaleX(0)
+
+@keyframes wrench
+    0%
+        transform: scaleX(1)
+    28%
+        transform: scaleX(0.8)
+    43%
+        transform: scaleX(1)
+    67%
+        transform: scaleX(0.9)
+    84%
+        transform: scaleX(1)
+    93%
+        transform: scaleX(0.87)
+    100%
+        transform: scaleX(1)
+
+//------ END of Next Button -------//
+        
