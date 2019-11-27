@@ -26,4 +26,20 @@ html(lang="en")
                 .next_button__button 
                     span Next
                     .next_button__arrow-right
-        
+        +feature(data.symbolicLinks.id, "darkblue", data.symbolicLinks.title, data.symbolicLinks.text)
+            .infoLinks
+                .infoLinks__text 
+                | This is a paragraph about the use of informative links. Do you know the feeling of seeing a link and having no idea, where it will lead you? As I see it, this is an issue as there are three possible ways it could turn out: 
+                | Anchor Link; linking to content on the same page. 
+                | Internal link - linking to another document on that site and external links. 
+                a(class="link") External link
+                    span(class="link__arrow link__arrow--external")
+                |  Often links are inside a paragraph!
+                .infoLinks__text
+                | Since there is more than external links: let's have a look at internal links! 
+                a(class="link") Internal Link
+                    span(class="link__arrow link__arrow--internal")
+                .infoLinks__text
+                | We should also consider anchor links, that just point to another section on the same page... 
+                a(class="link") Anchor Link
+                    span(class="link__arrow link__arrow--anchor")

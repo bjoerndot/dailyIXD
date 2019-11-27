@@ -9,6 +9,9 @@ $lightpink: #ffcbcb
 $lightgrey: #f1f1f1
 $white: #ffffff
 $black: #1f1f1f
+
+// BREAKPOINTS
+$break_small: 768px
 /********** MIXINS **********/
 
 @mixin pseudo($props: all, $duration, $function)
@@ -85,6 +88,8 @@ a
     display: grid
     grid-template-columns: repeat(2, 50%)
     border-bottom: 3px solid $black
+    @media screen and (max-width: $break-small)
+        grid-template-columns: 100%
 
 
 .intro__text
@@ -193,4 +198,76 @@ a
         transform: scaleX(1)
 
 //------ END of Next Button -------//
-        
+
+// 27.11. - Informative Links
+.link
+    font-weight: bold
+    position: relative
+    cursor: pointer
+    // setting up the circle that represents the current site.
+    &::before
+        @include pseudo($duration: 500ms, $function: ease-in)
+        display: block
+        width: 0.6rem
+        height: 0.6rem
+        border-radius: 50%
+        background: transparent
+        border: 0.2rem solid $blue
+        bottom: 0
+        right: 0
+        transform: translate(50%, 0.4rem)
+        opacity: 0
+    // general setup of arrow giving an underline effect from left to right
+    &__arrow
+        position: absolute
+        width: 100%
+        height: 0.2rem
+        background: $blue
+        bottom: 0
+        left: 0
+        transform: scaleX(0)
+        transform-origin: left
+        transition: all 500ms ease-in
+        // external additions
+        &--external
+            width: 110%
+            &::before
+                @include pseudo($duration: 500ms, $function: cubic-bezier(.1,.83,.21,.92))
+                width: 0.6rem
+                height: 0.6rem
+                border-right: 0.2rem solid $blue
+                border-bottom: 0.2rem solid $blue
+                bottom: 0
+                right: 0
+                transform: rotate(-45deg)translate(0.2rem, 0)
+                transform-origin: bottom right
+        &--internal
+            width: 102%
+            &::before
+                @include pseudo($duration: 500ms, $function: cubic-bezier(.1,.83,.21,.92))
+                width: 0.4rem
+                height: 0.4rem
+                border-radius: 50%
+                background: $blue
+                right: 0
+                bottom: 0
+                transform: translateY(25%)
+        &--anchor
+            width: 100%
+            &::before
+                @include pseudo($duration: 500ms, $function: cubic-bezier(.1,.83,.21,.92))
+                width: 0.5rem
+                height: 0.5rem
+                border-radius: 50%
+                border: 0.2rem solid $blue
+                background: $blue
+                right: 0
+                bottom: 0
+                transform: translate(0.4rem, 0.4rem)  
+    // trigger action on hover          
+    &:hover
+        &::before
+            opacity: 1
+        .link__arrow
+            transform: scaleX(1)
+            

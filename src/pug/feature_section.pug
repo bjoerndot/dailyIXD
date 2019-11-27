@@ -7,4 +7,5 @@ mixin feature(tag, color, title, description)
                 p This feature is not implemented yet
         .feature__content(class=color)
             h2.feature__content__heading #{title}
-            .feature__content__text #{description}
+            each d in description
+                .feature__content__text #{d}
