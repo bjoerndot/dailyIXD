@@ -43,3 +43,12 @@ html(lang="en")
                 | We should also consider anchor links, that just point to another section on the same page... 
                 a(class="link") Anchor Link
                     span(class="link__arrow link__arrow--anchor")
+        +feature(data.mouseTracking.id, "pink", data.mouseTracking.title, data.mouseTracking.text)
+            .mouseTracking
+                .cat
+                    .cat__ears
+                    .cat__eyes
+                        .cat__eye
+                        .cat__eye
+                    .cat__face
+    script(src="./index.js")

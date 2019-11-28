@@ -270,4 +270,76 @@ a
             opacity: 1
         .link__arrow
             transform: scaleX(1)
-            
+
+// Mouse Tracking: 28.11.19
+
+// Setting the "canvas" for the cat 
+.mouseTracking
+    @extend %flex-center
+    padding-top: 5rem
+
+// cat container that holds eyes, ears and face
+.cat
+    width: 20rem
+    height: 20rem
+    border-radius: 0 0 50% 0
+    background: $pink
+    position: relative
+    &__ears // basic triangles attached to the container
+        &::after, &::before
+            @include pseudo($duration: 500ms, $function: ease-in)
+            width: 0
+            height: 0
+            border-top: 7rem solid transparent
+            border-bottom: 10rem solid transparent
+            border-left: 10rem solid transparent
+            top: -30%
+        &::after
+            border-left: 10rem solid $pink
+        &::before
+           border-right: 10rem solid $pink 
+    &__eyes // container holding eyes in flexbox to easily distribute them
+        display: flex
+        width: 60%
+        height: 3rem
+        justify-content: space-between
+        position: absolute
+        top: 30%
+        left: 50%
+        transform: translateX(-50%)
+    &__eye // when interacting the eyes are rotated to create the impression of them following the mouse
+        width: 3rem
+        height: 3rem
+        border-radius: 50%
+        background: $black
+        position: relative
+        &::before // reflection in the eyes
+            @include pseudo($duration: 500ms, $function: ease-in)
+            width: 1rem
+            height: 1rem
+            border-radius: 50%
+            background: $white
+            top: 50%
+            left: 50%
+            transform: translate(0, -50%)
+    &__face // nose and mouth
+        position: absolute
+        border-radius: 50%
+        background: $black
+        width: 5rem
+        height: 3rem
+        bottom: 35%
+        left: 50%
+        transform: translateX(-50%)
+        &::before, &::after
+            @include pseudo($duration: 500ms, $function: ease-in)
+            width: 6rem
+            height: 12rem
+            border: 0.6rem solid transparent
+            border-bottom-color: $black 
+            border-radius: 45%
+            bottom: -30%
+        &::after
+            left: 30%
+        &::before
+            right: 30%
