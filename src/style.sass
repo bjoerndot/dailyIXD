@@ -61,8 +61,14 @@ div
 a
     color: $blue
     font-size: 1.6rem
-    &:visited
-        color: $pink 
+
+button
+    outline: none
+    border: none
+    padding: 0
+    margin: 0
+    &:focus
+        outline: 2px solid $blue
 
 /********* SKIN **********/
 .darkblue
@@ -343,3 +349,65 @@ a
             left: 30%
         &::before
             right: 30%
+
+// ARIA-tooltips: 29.11.
+
+.example_tooltip
+    @extend %flex-center
+    flex-direction: column
+    height: 20rem
+    justify-content: space-around
+
+
+.close__button
+    width: 4rem
+    height: 4rem
+    border-radius: 50%
+    background: $pink
+    position: relative
+    cursor: pointer
+    &__cross
+        width: 2rem
+        height: 2rem
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%) rotate(45deg)
+        transform-origin: center center
+        &::before, &::after
+            @include pseudo($duration: 300, $function: ease-in)
+            background: $white
+            width: 2rem
+            height: 0.2rem
+            border-radius: 5%
+            top: 50%
+        &::before
+            transform: translateX(-50%)
+        &::after
+            left: 0
+            transform: rotate(90deg)
+        
+
+a[aria-label], span[aria-label], div[aria-label], button[aria-label], li[aria-label]
+    &::after
+        z-index: 1
+        content: attr(aria-label)
+        background: $black
+        position: absolute
+        border-radius: 0.5rem
+        border-top-left-radius: 0
+        padding: 1rem 2rem
+        position: absolute
+        top: 100%
+        left: 50%
+        transform: translate(-50%, 0.8rem)
+        font-size: 1.2rem
+        font-weight: normal
+        visibility: hidden
+        transition: all 300ms ease-in
+        color: $white
+    &:hover
+        position: relative
+        &::after
+            visibility: visible
+            transition-delay: 1s

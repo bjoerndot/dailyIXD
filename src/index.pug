@@ -51,4 +51,9 @@ html(lang="en")
                         .cat__eye
                         .cat__eye
                     .cat__face
+        +feature(data.tooltip.id, "lightpink", data.tooltip.title, data.tooltip.text)
+            .example_tooltip
+                a(href="https://github.com/bjoerndot/dailyIXD", aria-label="https://github.com/bjoerndot/dailyIXD") Unprecise description of the link or just linked text-section
+                button.close__button(aria-label="Click here to close something!")
+                    .close__button__cross 
     script(src="./index.js")

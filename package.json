@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.pug",
+    "prebuild": "rmdir dist /s /q",
     "build":  "parcel build src/index.pug"
   },
   "author": "Oliver Schwamb",
