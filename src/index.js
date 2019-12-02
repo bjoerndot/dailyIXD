@@ -20,8 +20,26 @@ function eyeMovement(e){
     }
 }
 
+function toggleReadMode(e){
+    const book_icon = require('./img/book-icon.svg')
+    const eye_icon = require('./img/eye-icon.svg')
+    const readMode_class = document.getElementsByClassName("readMode")[0];
+    const readMode_button = document.getElementById("readMode_button").children[0]
+    console.log(readMode_class.classList)
+    const readMode = readMode_class.classList.contains("readMode--is-active") ? true : false;
+    console.log(readMode, readMode_class)
+    if(readMode){
+        readMode_class.classList.remove("readMode--is-active")
+        readMode_button.src = book_icon
+    }else{
+        readMode_class.classList.add("readMode--is-active")
+        readMode_button.src = eye_icon
+    }
+}
 
-
+// calling button for readmode
+const readModeButton = document.getElementById("readMode_button")
 
 // Event Listeners
 document.addEventListener('mousemove', eyeMovement)
+readModeButton.addEventListener('click', toggleReadMode)

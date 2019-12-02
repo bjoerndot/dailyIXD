@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap')
-
+@import url('https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap')
 /********** VARIABLES **********/
 // COLORS
 $darkblue: #132743
@@ -411,3 +411,55 @@ a[aria-label], span[aria-label], div[aria-label], button[aria-label], li[aria-la
         &::after
             visibility: visible
             transition-delay: 1s
+.readMode
+    width: calc(100% + 10rem)
+    margin: -5rem
+    display: grid
+    grid-template-columns: repeat(2, 50%)
+    &__left, &__right
+        display: flex
+        flex-direction: column
+    &__img 
+        max-width: 100%
+    &__text
+        padding: 0 2rem
+    &__h2
+        font-family: monospace
+    &__stuff
+        color: $white
+        background: $black
+        cursor: pointer
+        font-weight: bold
+        text-align: center
+    &__menu
+        @extend %flex-center
+        height: auto
+        padding: 2rem 0
+    &__button
+        width: 4rem
+        height: 4rem
+        border: 2px solid $black
+        border-radius: 50%
+        cursor: pointer
+        @extend %flex-center
+        &__img
+            width: 70%
+            height: 70%
+            margin: auto
+
+.readMode--is-active
+    & p
+        font-family: 'Gentium Book Basic', serif
+        line-height: 3rem
+        font-size: 2rem
+        letter-spacing: 0.03rem
+    & h2
+        font-family: 'Gentium Book Basic', serif
+        line-height: 4rem
+    & .readMode__img
+        display: none
+    & .readMode__stuff
+        display: none
+    & .readMode__right
+        width: 200%
+        margin-left: -100%

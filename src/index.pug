@@ -56,4 +56,25 @@ html(lang="en")
                 a(href="https://github.com/bjoerndot/dailyIXD", aria-label="https://github.com/bjoerndot/dailyIXD") Unprecise description of the link or just linked text-section
                 button.close__button(aria-label="Click here to close something!")
                     .close__button__cross 
+        +feature(data.readMode.id, "blue", data.readMode.title, data.readMode.text)
+            .readMode
+                .readMode__left
+                    img.readMode__img(src="https://images.unsplash.com/photo-1575178114667-c8a832c61f45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="Vase of pink peonies by @rebecca_lee_creative (unsplash.com)")
+                    img.readMode__img(src="https://images.unsplash.com/photo-1435783459217-ee7fe5414abe?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Peony vase by @alexseinet (unsplash.com)")
+                .readMode__right
+                    .readMode__menu
+                        button.readMode__button(aria-label="Enter read-mode" id="readMode_button") 
+                            img.readMode__button__img(class="readMode__button__img--is-active" src="./img/book-icon.svg" alt="Read mode")
+                    .readMode__text
+                        h2.readMode__h2 This paragraph is enourmously important!
+                        .readMode__stuff SIGN IN FOR OUR NEWSLETTER
+                        p.readMode__text__p Dorian winced and looked round at the grotesque things that lay in such fantastic postures on the ragged mattresses. The twisted limbs, the gaping mouths, the staring lustreless eyes, fascinated him. He knew in what strange heavens they were suffering, and what dull hells were teaching them the secret of some new joy. They were better off than he was. He was prisoned in thought. Memory, like a horrible malady, was eating his soul away. From time to time he seemed to see the eyes of Basil Hallward looking at him. Yet he felt he could not stay. The presence of Adrian Singleton troubled him. He wanted to be where no one would know who he was. He wanted to escape from himself.
+                        p.readMode__text__p "I am going on to the other place," he said after a pause.
+                        p.readMode__text__p "On the wharf?"
+                        p.readMode__text__p "Yes."
+                        p.readMode__text__p "That mad-cat is sure to be there. They won't have her in this place now."
+                        p.readMode__text__p Dorian shrugged his shoulders. "I am sick of women who love one. Women who hate one are much more interesting. Besides, the stuff is better."
+                        p.readMode__text__p "Much the same."
+                        p.readMode__text__p "I like it better. Come and have something to drink. I must have something."
+                
     script(src="./index.js")
