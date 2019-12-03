@@ -21,14 +21,14 @@ function eyeMovement(e){
 }
 
 function toggleReadMode(e){
+    // all images are required to be read by parcel-bundler
     const book_icon = require('./img/book-icon.svg')
     const eye_icon = require('./img/eye-icon.svg')
+    // fetching of all nodes
     const readMode_class = document.getElementsByClassName("readMode")[0];
     const readMode_button = document.getElementById("readMode_button").children[0]
-    console.log(readMode_class.classList)
-    const readMode = readMode_class.classList.contains("readMode--is-active") ? true : false;
-    console.log(readMode, readMode_class)
-    if(readMode){
+    // check if read-mode is already enabled and add or remove the corresponding class/icons
+    if(readMode_class.classList.contains("readMode--is-active")){
         readMode_class.classList.remove("readMode--is-active")
         readMode_button.src = book_icon
     }else{
@@ -37,9 +37,22 @@ function toggleReadMode(e){
     }
 }
 
-// calling button for readmode
+function handleCheckbox(e){
+    const confirmButton = document.getElementsByClassName("terms__confirm")[0]
+    const confirmButtonText = document.getElementsByClassName("terms__confirm__text")[0]
+    const confirmToggle = "terms__confirm--is-visible"
+    if(this.checked){
+        confirmButton.classList.add(confirmToggle)
+    }else{
+        confirmButton.classList.remove(confirmToggle)
+    }
+}
+
+// pull relevant buttons into script
 const readModeButton = document.getElementById("readMode_button")
+const termsCheckbox = document.getElementsByClassName("terms__checkbox")[0]
 
 // Event Listeners
 document.addEventListener('mousemove', eyeMovement)
 readModeButton.addEventListener('click', toggleReadMode)
+termsCheckbox.addEventListener("change", handleCheckbox)

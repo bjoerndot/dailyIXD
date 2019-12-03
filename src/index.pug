@@ -76,5 +76,13 @@ html(lang="en")
                         p.readMode__text__p Dorian shrugged his shoulders. "I am sick of women who love one. Women who hate one are much more interesting. Besides, the stuff is better."
                         p.readMode__text__p "Much the same."
                         p.readMode__text__p "I like it better. Come and have something to drink. I must have something."
-                
+        +feature(data.terms.id, "darkblue", data.terms.title, data.terms.text)
+            .terms
+                form.terms__form(aria-label="Accept the terms and conditions and confirm your action.")
+                    label.terms__label
+                        input.terms__checkbox(aria-labeledby="terms__label" type="checkbox" name="Terms and Conditions")
+                        .terms__checkbox__custom
+                        .terms__checkbox__label#terms__label I accept the terms and conditions.
+                    button.terms__confirm 
+                        span.terms__confirm__text Confirm
     script(src="./index.js")
