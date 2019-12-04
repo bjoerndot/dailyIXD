@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap')
-@import url('https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap')
+// @import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap')
+// @import url('https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap')
 /********** VARIABLES **********/
 // COLORS
 $darkblue: #132743
@@ -576,5 +576,51 @@ $terms_green: #06d488
             & .terms__confirm__text
                 opacity: 1
             
+// 04.12. - Focused Form
 
-    
+// styling the whole form
+.focusedForms
+    @extend %flex-center
+    &__form
+        @extend %flex-center
+        flex-direction: column
+        width: 100%
+    &__row
+        display: flex
+        flex-direction: column-reverse   
+        width: 50%
+        justify-content: space-between
+        margin-bottom: 1rem
+    &__label
+        font-size: 1.5rem
+        transition: all 250ms ease-in-out
+        transform: scaleY(0)
+        transform-origin: bottom center
+        color: $blue
+        font-weight: bold
+    &__input
+        width: 20rem
+        font-size: 2rem
+        transition: 250ms ease-in-out all
+        border-radius: 5px
+        outline: none
+        box-shadow: 0 2px 3px 0 rgba(32,33,36,0.1)
+        border: 1px solid $blue
+        padding: 0.6rem 1rem
+        background: transparentize($blue, 0.7)
+        &::placeholder
+            color: $blue
+        &:focus
+            font-size: 3rem
+            width: 30rem
+            background: $white
+            & + .focusedForms__label
+                transform: scaleY(1)
+            &::placeholder
+                color: transparent
+        &:not(:placeholder-shown)
+            background: transparentize($blue, 0.95)
+        &:not(:placeholder-shown) + .focusedForms__label
+            transform: scaleY(1)
+            font-size: 1rem
+

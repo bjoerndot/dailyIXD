@@ -1,0 +1,4 @@
+mixin focusedFormField(id, title, inputType, helptext)
+    .focusedForms__row(aria-label=helptext)
+        input.focusedForms__input(type=inputType id=id, placeholder=title)
+        label.focusedForms__label(for=id) #{title}

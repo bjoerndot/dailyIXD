@@ -1,4 +1,5 @@
 include ./pug/feature_section.pug
+include ./pug/focusedFormField.pug
 include ./data.pug
 
 <!DOCTYPE html>
@@ -59,8 +60,8 @@ html(lang="en")
         +feature(data.readMode.id, "blue", data.readMode.title, data.readMode.text)
             .readMode
                 .readMode__left
-                    img.readMode__img(src="https://images.unsplash.com/photo-1575178114667-c8a832c61f45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="Vase of pink peonies by @rebecca_lee_creative (unsplash.com)")
-                    img.readMode__img(src="https://images.unsplash.com/photo-1435783459217-ee7fe5414abe?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Peony vase by @alexseinet (unsplash.com)")
+                    //- img.readMode__img(src="https://images.unsplash.com/photo-1575178114667-c8a832c61f45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="Vase of pink peonies by @rebecca_lee_creative (unsplash.com)")
+                    //- img.readMode__img(src="https://images.unsplash.com/photo-1435783459217-ee7fe5414abe?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Peony vase by @alexseinet (unsplash.com)")
                 .readMode__right
                     .readMode__menu
                         button.readMode__button(aria-label="Enter read-mode" id="readMode_button") 
@@ -85,4 +86,9 @@ html(lang="en")
                         .terms__checkbox__label#terms__label I accept the terms and conditions.
                     button.terms__confirm 
                         span.terms__confirm__text Confirm
+        +feature(data.focusedForm.id, "pink", data.focusedForm.title, data.focusedForm.text)
+            .focusedForms
+                form.focusedForms__form(aria-label="Enter your address")
+                    each field in data.focusedForm.formFields
+                        +focusedFormField(field.id, field.title, field.type, field.help)
     script(src="./index.js")
