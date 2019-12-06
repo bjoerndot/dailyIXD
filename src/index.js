@@ -1,3 +1,5 @@
+import {selectData} from "./js/data"
+
 function eyeMovement(e){
     // helper-functions
     // angle calculated by arctan, which returns a value in radian
@@ -47,12 +49,129 @@ function handleCheckbox(e){
         confirmButton.classList.remove(confirmToggle)
     }
 }
+/*** Searchable-fullwidth Dropdown ***/
+let selectIsOpen = false; // store the state of the dropdown
+
+// cleanup and sort of raw-data
+function sortSelect(){
+    selectData.sort();
+    return [...new Set(selectData)]
+}
+
+// pushing an array of items into an HTML-String
+function arrayToHTMLString(arr, className){
+    let htmlString = ""
+    arr.forEach(item => htmlString += `<div class="${className}" tabindex="0">${item}</div>`)
+    return htmlString
+}
+
+/**
+ * @param {String} HTML representing a single element
+ * @return {Element}
+ */
+function htmlToElement(html) {
+    var template = document.createElement('template');
+    html = html.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.firstChild;
+}
+
+function hideSelectScreen(){
+    const selectScreen = document.getElementsByClassName("selectScreen")[0]
+    selectRemoveEventListeners();
+    selectScreen.remove()
+    selectIsOpen = false;
+}
+
+function showSelectScreen(data){
+    let selectScreen = `<div class='selectScreen'>${arrayToHTMLString(data, "selectItem")}</div>`
+    const htmlElement = htmlToElement(selectScreen)
+    const insert = document.getElementsByClassName("ddfullscreen__container")[0]
+    insert.appendChild(htmlElement)
+    selectAddEventListeners();
+    selectIsOpen = true;
+}
+
+function setSelected(e){
+    // get select-button to change text and selectScreen to remove it from DOM
+    const select = document.getElementsByClassName("ddfullscreen__select")[0]
+    hideSelectScreen();
+    select.value = e.target.innerText
+}
+
+// same as setSelected but button can be used with key just as mouse
+function setSelectedKey(e){
+    console.log(e)
+    if(e.keyCode === 13){
+        setSelected(e)
+    }
+}
+
+// adding keypress and click eventlisteners
+function selectAddEventListeners() { 
+    const selectItems = document.getElementsByClassName("selectItem")
+    for(let i = 0; i < selectItems.length; i++){
+        selectItems[i].addEventListener("click", setSelected)
+        selectItems[i].addEventListener("keypress", setSelectedKey)
+    }
+}
+
+// removing the eventListeners of elements, that disappear
+function selectRemoveEventListeners(){
+    const selectItems = document.getElementsByClassName("selectItem")
+    for(let i = 0; i < selectItems.length; i++){
+        selectItems[i].removeEventListener("click", setSelected)
+        selectItems[i].removeEventListener("keypress", setSelectedKey)
+
+    }
+}
+
+function handleSelectClick(e){
+    if(!selectIsOpen){
+        filterSelect(document.getElementsByClassName("ddfullscreen__select")[0].value)
+    }else{
+        hideSelectScreen();
+    }
+}
+
+function filterSelect(val){
+    let newDataSet = sortSelect().filter(item => {
+        return item.toLowerCase().includes(val.toLowerCase())
+    })
+    if(selectIsOpen){
+        hideSelectScreen();
+    }
+    showSelectScreen(newDataSet);
+}
+
+function handleSelectKeyPress(e){
+    filterSelect(e.target.value)
+}
+
+function clearDropdown(e){
+    const select = document.getElementsByClassName("ddfullscreen__select")[0]
+    select.value = ""
+    select.focus()
+    if(selectIsOpen){
+        hideSelectScreen();
+    }
+    showSelectScreen(sortSelect());
+}
 
 // pull relevant buttons into script
 const readModeButton = document.getElementById("readMode_button")
 const termsCheckbox = document.getElementsByClassName("terms__checkbox")[0]
+// buttons for dropdown
+const dropdownSelect = document.getElementsByClassName("ddfullscreen__select")[0]
+const dropdownSelectButton = document.getElementsByClassName("ddfullscreen__arrow")[0]
+const dropdownDelete = document.getElementsByClassName("ddfullscreen__delete")[0]
 
 // Event Listeners
 document.addEventListener('mousemove', eyeMovement)
 readModeButton.addEventListener('click', toggleReadMode)
 termsCheckbox.addEventListener("change", handleCheckbox)
+// EventListeners for dropdown
+dropdownSelect.addEventListener("click", handleSelectClick)
+dropdownSelect.addEventListener("keyup", handleSelectKeyPress)
+dropdownSelectButton.addEventListener("click", handleSelectClick)
+dropdownDelete.addEventListener("click", clearDropdown)
