@@ -158,6 +158,35 @@ function clearDropdown(e){
     showSelectScreen(sortSelect());
 }
 
+function increaseLoadCount(label, count = 0){
+    count++;
+
+}
+
+function showSucess(label){
+    label.style.opacity = 0
+    label.parentElement.classList.remove("upload__button--is-active", "upload__button--up", "upload__button--down")
+    label.parentElement.classList.add("upload__button--is-success")
+}
+
+function buttonLoadAnimation(e){
+    const button = e.target
+    button.classList.add("upload__button--is-active")
+    const label = e.target.children[0]
+    let count = 0
+    label.innerText=`${count}%`
+    let loading = setInterval(function(){
+
+        count++;
+        label.innerText=`${count}%`
+        if(count === 100) {
+            clearInterval(loading);
+            showSucess(label)
+        }
+    }, 100)
+
+}
+
 // pull relevant buttons into script
 const readModeButton = document.getElementById("readMode_button")
 const termsCheckbox = document.getElementsByClassName("terms__checkbox")[0]
@@ -165,6 +194,8 @@ const termsCheckbox = document.getElementsByClassName("terms__checkbox")[0]
 const dropdownSelect = document.getElementsByClassName("ddfullscreen__select")[0]
 const dropdownSelectButton = document.getElementsByClassName("ddfullscreen__arrow")[0]
 const dropdownDelete = document.getElementsByClassName("ddfullscreen__delete")[0]
+// buttons for up- and download
+const updownbuttons = document.getElementsByClassName("upload__button")
 
 // Event Listeners
 document.addEventListener('mousemove', eyeMovement)
@@ -175,3 +206,6 @@ dropdownSelect.addEventListener("click", handleSelectClick)
 dropdownSelect.addEventListener("keyup", handleSelectKeyPress)
 dropdownSelectButton.addEventListener("click", handleSelectClick)
 dropdownDelete.addEventListener("click", clearDropdown)
+for(let i = 0; i<updownbuttons.length; i++){
+    updownbuttons[i].addEventListener("click", buttonLoadAnimation)
+}

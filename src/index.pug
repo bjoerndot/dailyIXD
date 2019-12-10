@@ -97,5 +97,12 @@ html(lang="en")
                     input.ddfullscreen__select(type="text" placeholder="Choose your profession")
                     button.ddfullscreen__delete
                     .ddfullscreen__arrow
+        +feature(data.uploadButton.id, "blue", data.uploadButton.title, data.uploadButton.text)
+            .upload
+                button.upload__button.upload__button--up Upload
+                    .upload__button__label.upload__button__label--is-active %
+                button.upload__button.upload__button--down Download
+                    .upload__button__label.upload__button__label--is-active %
+
     script(src="./index.js")
 
